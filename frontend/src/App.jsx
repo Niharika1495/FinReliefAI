@@ -10,30 +10,43 @@ import { PublicRoute } from '@/routes/PublicRoute';
 import { AdminProtectedRoute } from '@/routes/AdminProtectedRoute';
 import { FullPageSpinner } from '@/components/ui/Spinner';
 
+// Safe lazy helper to auto-reload page if chunk loading fails due to a new deployment
+function safeLazy(importFn) {
+  return lazy(() =>
+    importFn().catch((err) => {
+      if (err.name === 'ChunkLoadError' || err.message?.includes('Failed to fetch dynamically imported module')) {
+        window.location.reload();
+        return { default: () => null };
+      }
+      throw err;
+    })
+  );
+}
+
 // Lazy-loaded pages
-const LoginPage = lazy(() => import('@/pages/auth/LoginPage'));
-const RegisterPage = lazy(() => import('@/pages/auth/RegisterPage'));
-const DashboardPage = lazy(() => import('@/pages/dashboard/DashboardPage'));
-const LoansPage = lazy(() => import('@/pages/loans/LoansPage'));
-const LoanDetailPage = lazy(() => import('@/pages/loans/LoanDetailPage'));
-const FinancialAnalysisPage = lazy(() => import('@/pages/analysis/FinancialAnalysisPage'));
-const SettlementPage = lazy(() => import('@/pages/settlement/SettlementPage'));
-const ProfilePage = lazy(() => import('@/pages/profile/ProfilePage'));
-const NotificationsPage = lazy(() => import('@/pages/notifications/NotificationsPage'));
-const ReportsPage = lazy(() => import('@/pages/reports/ReportsPage'));
-const DocumentUploadPage = lazy(() => import('@/pages/documents/DocumentUploadPage'));
+const LoginPage = safeLazy(() => import('@/pages/auth/LoginPage'));
+const RegisterPage = safeLazy(() => import('@/pages/auth/RegisterPage'));
+const DashboardPage = safeLazy(() => import('@/pages/dashboard/DashboardPage'));
+const LoansPage = safeLazy(() => import('@/pages/loans/LoansPage'));
+const LoanDetailPage = safeLazy(() => import('@/pages/loans/LoanDetailPage'));
+const FinancialAnalysisPage = safeLazy(() => import('@/pages/analysis/FinancialAnalysisPage'));
+const SettlementPage = safeLazy(() => import('@/pages/settlement/SettlementPage'));
+const ProfilePage = safeLazy(() => import('@/pages/profile/ProfilePage'));
+const NotificationsPage = safeLazy(() => import('@/pages/notifications/NotificationsPage'));
+const ReportsPage = safeLazy(() => import('@/pages/reports/ReportsPage'));
+const DocumentUploadPage = safeLazy(() => import('@/pages/documents/DocumentUploadPage'));
 
 // AI Workspace pages
-const AIDashboardPage = lazy(() => import('@/pages/ai/AIDashboardPage'));
-const NegotiationStrategyPage = lazy(() => import('@/pages/ai/NegotiationStrategyPage'));
-const SettlementLetterPage = lazy(() => import('@/pages/ai/SettlementLetterPage'));
-const NegotiationEmailPage = lazy(() => import('@/pages/ai/NegotiationEmailPage'));
-const FinancialExplanationPage = lazy(() => import('@/pages/ai/FinancialExplanationPage'));
-const AIHistoryPage = lazy(() => import('@/pages/ai/AIHistoryPage'));
+const AIDashboardPage = safeLazy(() => import('@/pages/ai/AIDashboardPage'));
+const NegotiationStrategyPage = safeLazy(() => import('@/pages/ai/NegotiationStrategyPage'));
+const SettlementLetterPage = safeLazy(() => import('@/pages/ai/SettlementLetterPage'));
+const NegotiationEmailPage = safeLazy(() => import('@/pages/ai/NegotiationEmailPage'));
+const FinancialExplanationPage = safeLazy(() => import('@/pages/ai/FinancialExplanationPage'));
+const AIHistoryPage = safeLazy(() => import('@/pages/ai/AIHistoryPage'));
 
 // Admin pages
-const AdminLoginPage = lazy(() => import('@/pages/admin/AdminLoginPage'));
-const AdminDashboardPage = lazy(() => import('@/pages/admin/AdminDashboardPage'));
+const AdminLoginPage = safeLazy(() => import('@/pages/admin/AdminLoginPage'));
+const AdminDashboardPage = safeLazy(() => import('@/pages/admin/AdminDashboardPage'));
 
 function App() {
   return (
