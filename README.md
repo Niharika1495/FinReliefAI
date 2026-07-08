@@ -5,7 +5,8 @@ FinRelief AI is a production-grade, scalable platform designed to empower indivi
 This document outlines the **Phase 1 Architecture & Folder Structure Setup**.
 
 ---
-
+##  DEMO LINK:  https://fin-relief-ai.vercel.app/
+---
 ## Table of Contents
 1. [Recommended Architecture](#recommended-architecture)
 2. [Clean Architecture Explanation](#clean-architecture-explanation)
