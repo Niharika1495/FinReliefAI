@@ -10,6 +10,9 @@ import { PublicRoute } from '@/routes/PublicRoute';
 import { AdminProtectedRoute } from '@/routes/AdminProtectedRoute';
 import { FullPageSpinner } from '@/components/ui/Spinner';
 
+import LoginPage from '@/pages/auth/LoginPage';
+import RegisterPage from '@/pages/auth/RegisterPage';
+
 // Safe lazy helper to auto-reload page if chunk loading fails due to a new deployment
 function safeLazy(importFn) {
   return lazy(() =>
@@ -24,8 +27,6 @@ function safeLazy(importFn) {
 }
 
 // Lazy-loaded pages
-const LoginPage = safeLazy(() => import('@/pages/auth/LoginPage'));
-const RegisterPage = safeLazy(() => import('@/pages/auth/RegisterPage'));
 const DashboardPage = safeLazy(() => import('@/pages/dashboard/DashboardPage'));
 const LoansPage = safeLazy(() => import('@/pages/loans/LoansPage'));
 const LoanDetailPage = safeLazy(() => import('@/pages/loans/LoanDetailPage'));

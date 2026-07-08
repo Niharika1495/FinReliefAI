@@ -6,7 +6,7 @@ import { Card, CardHeader } from '@/components/ui/Card';
 import { StatCard } from '@/components/ui/StatCard';
 import { SkeletonCard } from '@/components/ui/Skeleton';
 import { formatCurrency, formatPercent, getRiskColor } from '@/utils/formatters';
-import { RefreshCw, TrendingUp, Activity, AlertTriangle, CheckCircle, DollarSign, BarChart3 } from 'lucide-react';
+import { RefreshCw, TrendingUp, Activity, AlertTriangle, CheckCircle, IndianRupee, BarChart3 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { motion } from 'framer-motion';
 
@@ -124,7 +124,7 @@ export default function FinancialAnalysisPage() {
 
         <div className="lg:col-span-2 grid grid-cols-2 gap-4 content-start">
           <StatCard title="Monthly Surplus" value={formatCurrency(data.monthly_surplus)}
-            icon={DollarSign} color={data.monthly_surplus >= 0 ? 'emerald' : 'red'} />
+            icon={IndianRupee} color={data.monthly_surplus >= 0 ? 'emerald' : 'red'} />
           <StatCard title="DTI Ratio" value={formatPercent(data.dti_ratio)}
             icon={BarChart3} color={data.dti_ratio < 35 ? 'emerald' : data.dti_ratio < 50 ? 'amber' : 'red'}
             subtitle="Debt-to-Income" />

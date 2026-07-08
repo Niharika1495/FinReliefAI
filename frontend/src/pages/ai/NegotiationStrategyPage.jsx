@@ -72,7 +72,7 @@ export default function NegotiationStrategyPage() {
 
   const loanOptions = allLoans.map((l) => ({
     value: l.id.toString(),
-    label: `${l.lender_name} (${l.status} - Outstanding: $${l.outstanding_amount.toLocaleString()})`,
+    label: `${l.lender_name} (${l.loan_status} - Outstanding: ₹${l.outstanding_amount.toLocaleString()})`,
   }));
 
   return (

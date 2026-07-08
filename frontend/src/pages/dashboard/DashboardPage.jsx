@@ -8,7 +8,7 @@ import { useAuth } from '@/context/AuthContext';
 import { formatCurrency, formatPercent, formatRelativeTime, getRiskColor } from '@/utils/formatters';
 import { CHART_COLORS } from '@/utils/constants';
 import {
-  DollarSign, CreditCard, TrendingUp, Activity,
+  IndianRupee, CreditCard, TrendingUp, Activity,
   RefreshCw, Brain, Handshake, AlertTriangle
 } from 'lucide-react';
 import {
@@ -120,7 +120,7 @@ export default function DashboardPage() {
         <StatCard
           title="Monthly Income"
           value={formatCurrency(overview?.monthly_income)}
-          icon={DollarSign}
+          icon={IndianRupee}
           color="emerald"
           subtitle="Gross monthly earnings"
         />
@@ -370,7 +370,7 @@ export default function DashboardPage() {
                 margin={{ top: 4, right: 4, left: 10, bottom: 0 }}
                 layout="vertical"
               >
-                <XAxis type="number" tick={{ fontSize: 10 }} tickFormatter={(v) => `$${(v/1000).toFixed(0)}k`} />
+                <XAxis type="number" tick={{ fontSize: 10 }} tickFormatter={(v) => `₹${(v/1000).toFixed(0)}k`} />
                 <YAxis type="category" dataKey="lender_name" tick={{ fontSize: 11 }} width={80} />
                 <Tooltip content={<CustomTooltip />} />
                 <Bar dataKey="outstanding_amount" name="Outstanding" fill="#14B8A6" radius={[0, 4, 4, 0]} />

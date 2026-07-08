@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Link, useNavigate } from 'react-router-dom';
-import { Mail, Lock, User, DollarSign } from 'lucide-react';
+import { Mail, Lock, User, IndianRupee } from 'lucide-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { authApi } from '@/api/auth';
@@ -119,7 +119,7 @@ export default function RegisterPage() {
           <Input
             label="Monthly Income"
             type="number"
-            leftIcon={DollarSign}
+            leftIcon={IndianRupee}
             placeholder="5000"
             error={errors.monthly_income?.message}
             id="income-input"
@@ -128,7 +128,7 @@ export default function RegisterPage() {
           <Input
             label="Monthly Expenses"
             type="number"
-            leftIcon={DollarSign}
+            leftIcon={IndianRupee}
             placeholder="2000"
             error={errors.monthly_expenses?.message}
             id="expenses-input"

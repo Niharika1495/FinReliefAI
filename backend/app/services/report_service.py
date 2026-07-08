@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from datetime import datetime
 from typing import Dict, Any, Tuple
 from app.models.user import User
+from app.models.loan import Loan
 from app.services.loan_service import LoanService
 from app.services.financial_analysis_service import FinancialAnalysisService
 from app.services.settlement_service import SettlementService
@@ -83,7 +84,7 @@ class ReportService:
             }
             
             loans_list = []
-            loans = LoanService.get_loans(db, user)
+            loans = db.query(Loan).filter(Loan.user_id == user.id, Loan.is_active == True).all()
             for l in loans:
                 loans_list.append({
                     "lender": l.lender_name,
@@ -130,7 +131,7 @@ class ReportService:
 
         elif report_type == "loans":
             # Direct Loans list report
-            loans = LoanService.get_loans(db, user)
+            loans = db.query(Loan).filter(Loan.user_id == user.id, Loan.is_active == True).all()
             loans_list = []
             total_outstanding = 0.0
             total_emi = 0.0

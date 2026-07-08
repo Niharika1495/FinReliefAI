@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
 import { Spinner } from '@/components/ui/Spinner';
 import { documentsApi } from '@/api/documents';
-import { Upload, FileText, CheckCircle2, AlertTriangle, Trash2, Calendar, DollarSign, Activity, Percent } from 'lucide-react';
+import { Upload, FileText, CheckCircle2, AlertTriangle, Trash2, Calendar, IndianRupee, Activity, Percent } from 'lucide-react';
 import { formatCurrency, formatPercent, formatDate } from '@/utils/formatters';
 import toast from 'react-hot-toast';
 

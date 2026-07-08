@@ -7,7 +7,7 @@ import { Card, CardHeader } from '@/components/ui/Card';
 import { StatCard } from '@/components/ui/StatCard';
 import { SkeletonCard } from '@/components/ui/Skeleton';
 import { formatCurrency, formatPercent } from '@/utils/formatters';
-import { RefreshCw, Handshake, DollarSign, TrendingDown, CheckCircle, AlertCircle } from 'lucide-react';
+import { RefreshCw, Handshake, IndianRupee, TrendingDown, CheckCircle, AlertCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
 
@@ -104,14 +104,14 @@ export default function SettlementPage() {
           <StatCard
             title="Total Est. Savings"
             value={formatCurrency(summary.total_savings)}
-            icon={DollarSign}
+            icon={IndianRupee}
             color="teal"
             subtitle="If settled today"
           />
           <StatCard
             title="Total Settlement"
             value={formatCurrency(summary.total_recommended_settlement)}
-            icon={DollarSign}
+            icon={IndianRupee}
             color="amber"
             subtitle="Recommended offer"
           />

@@ -1,4 +1,4 @@
-import { Bell, Check, CheckCheck, AlertCircle, Info, DollarSign } from 'lucide-react';
+import { Bell, Check, CheckCheck, AlertCircle, Info, IndianRupee } from 'lucide-react';
 import { useNotifications } from '@/hooks/useNotifications';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
@@ -13,7 +13,7 @@ const TYPE_ICON = {
   ALERT: AlertCircle,
   REMINDER: Bell,
   INFO: Info,
-  PAYMENT: DollarSign,
+  PAYMENT: IndianRupee,
 };
 
 const TYPE_COLOR = {

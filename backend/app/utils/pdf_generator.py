@@ -1,8 +1,29 @@
 import os
+from datetime import datetime
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
+
+def format_indian_currency(amount: float) -> str:
+    try:
+        val = round(amount)
+        val_str = str(abs(val))
+        if len(val_str) <= 3:
+            res = val_str
+        else:
+            last_three = val_str[-3:]
+            remaining = val_str[:-3]
+            groups = []
+            while len(remaining) > 0:
+                groups.append(remaining[-2:])
+                remaining = remaining[:-2]
+            groups.reverse()
+            res = ",".join(groups) + "," + last_three
+        prefix = "-" if val < 0 else ""
+        return f"Rs. {prefix}{res}"
+    except Exception:
+        return f"Rs. {amount}"
 
 def generate_pdf_report(filename: str, report_title: str, report_data: dict) -> str:
     """
@@ -41,12 +62,11 @@ def generate_pdf_report(filename: str, report_title: str, report_data: dict) -> 
     )
     
     section_style = ParagraphStyle(
-        'SectionHeading',
+        'DocSection',
         parent=styles['Heading2'],
-        textColor=primary_color,
+        textColor=secondary_color,
         fontSize=14,
-        leading=18,
-        spaceBefore=15,
+        spaceBefore=10,
         spaceAfter=10
     )
     
@@ -58,16 +78,13 @@ def generate_pdf_report(filename: str, report_title: str, report_data: dict) -> 
         leading=14
     )
 
-    # Add Title and Subtitle
+    # Title & Metadata header
     story.append(Paragraph(report_title, title_style))
-    story.append(Paragraph("FinRelief AI - Debt Relief & Financial Recovery Platform", subtitle_style))
+    story.append(Paragraph(f"Generated on {datetime.now().strftime('%B %d, %Y')} | FinRelief AI Portfolio Analytics", subtitle_style))
     story.append(Spacer(1, 10))
 
     # Add Sections and Tables
     for section_title, data in report_data.items():
-        if not data:
-            continue
-        
         story.append(Paragraph(section_title, section_style))
         
         if isinstance(data, dict):
@@ -75,7 +92,7 @@ def generate_pdf_report(filename: str, report_title: str, report_data: dict) -> 
             table_data = []
             for k, v in data.items():
                 label = str(k).replace("_", " ").title()
-                val = f"${v:,.2f}" if isinstance(v, (int, float)) and "count" not in str(k).lower() and "score" not in str(k).lower() and "id" not in str(k).lower() and "months" not in str(k).lower() else str(v)
+                val = format_indian_currency(v) if isinstance(v, (int, float)) and "count" not in str(k).lower() and "score" not in str(k).lower() and "id" not in str(k).lower() and "months" not in str(k).lower() else str(v)
                 table_data.append([
                     Paragraph(f"<b>{label}</b>", body_style),
                     Paragraph(val, body_style)
@@ -108,7 +125,7 @@ def generate_pdf_report(filename: str, report_title: str, report_data: dict) -> 
                 row_cells = []
                 for h in headers:
                     val = row[h]
-                    cell_str = f"${val:,.2f}" if isinstance(val, (int, float)) and "id" not in str(h).lower() and "rate" not in str(h).lower() and "months" not in str(h).lower() else str(val)
+                    cell_str = format_indian_currency(val) if isinstance(val, (int, float)) and "id" not in str(h).lower() and "rate" not in str(h).lower() and "months" not in str(h).lower() else str(val)
                     row_cells.append(Paragraph(cell_str, body_style))
                 table_data.append(row_cells)
                 

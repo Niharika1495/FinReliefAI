@@ -11,7 +11,7 @@ import { Card, CardHeader } from '@/components/ui/Card';
 import { StatCard } from '@/components/ui/StatCard';
 import { SkeletonCard } from '@/components/ui/Skeleton';
 import { formatCurrency, formatPercent } from '@/utils/formatters';
-import { DollarSign, User, Save, TrendingUp, Activity, RefreshCw } from 'lucide-react';
+import { IndianRupee, User, Save, TrendingUp, Activity, RefreshCw } from 'lucide-react';
 
 const schema = z.object({
   monthly_income: z.coerce.number().positive('Monthly income must be positive'),
@@ -120,7 +120,7 @@ export default function ProfilePage() {
             <Input
               label="Monthly Income"
               type="number"
-              leftIcon={DollarSign}
+              leftIcon={IndianRupee}
               placeholder="5000"
               error={errors.monthly_income?.message}
               id="profile-income-input"
@@ -129,7 +129,7 @@ export default function ProfilePage() {
             <Input
               label="Monthly Expenses"
               type="number"
-              leftIcon={DollarSign}
+              leftIcon={IndianRupee}
               placeholder="2000"
               error={errors.monthly_expenses?.message}
               id="profile-expenses-input"
@@ -178,7 +178,7 @@ export default function ProfilePage() {
           <StatCard
             title="Net Surplus"
             value={formatCurrency(profile.monthly_income - profile.monthly_expenses)}
-            icon={DollarSign}
+            icon={IndianRupee}
             color={(profile.monthly_income - profile.monthly_expenses) >= 0 ? 'teal' : 'red'}
           />
         </div>
